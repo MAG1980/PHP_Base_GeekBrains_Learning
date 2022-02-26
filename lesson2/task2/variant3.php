@@ -2,6 +2,7 @@
 //Вариант 3. Рекурсия
 $start = 0;
 $end = 15;
+
 printRangeNumbers($start, $end);
 
 function printRangeNumbers($start, $end)
@@ -17,6 +18,6 @@ function recursivePrint($start, $end)
         return;
     } else {
         echo "$start ";
+        recursivePrint(++$start, $end);
     }
-    recursivePrint(++$start, $end);
 }
