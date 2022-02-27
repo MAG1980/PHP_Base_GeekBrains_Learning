@@ -1,5 +1,5 @@
 <?php
-$title = renderTemplate('title');
+$title = renderTemplate("title");
 $menu = renderTemplate("menu");
 $content = renderTemplate("content");
 $about = renderTemplate("about", _, _, "8-800-111-33-55");
