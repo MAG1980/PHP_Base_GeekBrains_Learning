@@ -1,8 +1,8 @@
 <?php
 function timeToSring( $hours, $minutes )
 {
-    return "{$hours} " . numToWord( $hours, [ 'час', 'часа', 'часов' ) ] . " {$minutes} " .
-        numToWord( $minutes,  ['минута', 'минуты', 'минут'] )  . PHP_EOL;
+    return "{$hours} " . numToWord( $hours, [ 'час', 'часа', 'часов' ] ) . " {$minutes} " .
+        numToWord( $minutes, [ 'минута', 'минуты', 'минут' ] ) . PHP_EOL;
 
 }
 
@@ -29,7 +29,7 @@ echo timeToSring( 11, 11 );
 echo timeToSring( 22, 15 );
 echo timeToSring( 9, 9 );
 
-$item = ['яблоко', 'яблока', 'яблок'];
+$item = [ 'яблоко', 'яблока', 'яблок' ];
 echo 1 . " " . numToWord( 1, $item ) . PHP_EOL;
 echo 9 . " " . numToWord( 9, $item ) . PHP_EOL;
 echo 11 . " " . numToWord( 11, $item ) . PHP_EOL;
