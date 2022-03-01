@@ -1,8 +1,8 @@
 <?php
 //Вариант 1
-$a = rand(0, 15);
+$a = rand( 0, 15 );
 a:
-switch ($a) {
+switch ( $a ){
     case $a <= 15 :
     {
         echo "$a ";
