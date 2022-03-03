@@ -1,11 +1,11 @@
 <?php
 $menu =
-	[ 'Главная' => '/link1',
+	[ 'Главная' => '/',
 		'Каталог' =>
 			[
 				'Яблоко' => '../img/apple.jpg',
-				'Пицца' => '../img/pizza.jpg',
-				'Чай' => '../img/tea.jpg',
+				'Пицца' => '../img/pizza.jpeg',
+				'Чай' => '../img/tea.png',
 			],
 		'Галерея работ' =>
 			[
@@ -14,9 +14,31 @@ $menu =
 				'Работа 3' => '/work3',
 			],
 		'Контакты' => '/link4',
-		'О нас' => '/link5',
-	]
+		'О нас' => '/?page=about',
+	];
+function renderMenu( array $menu )
+{
+	$menuTemplate = '';
+	foreach ( $menu as $menuItem => $menuLink ) {
+		if ( is_array( $menuLink ) ) {
+			$item = '
+<li>' . $menuItem . '
+	<ul>' . renderMenu( $menuLink ) . '</ul>
+</li>';
+		} else {
+			$item = '
+<li><a href="' . $menuLink . '">' . $menuItem . '</a></li>';
+		}
+		$menuTemplate .= $item;
+	}
+	return $menuTemplate;
+}
+
 ?>
-<a href="/">Главная</a>
-<a href="/?page=catalog">Каталог</a>
-<a href="/?page=about">О нас</a><br>
+
+<ul class="menu_nav">
+	<?= renderMenu( $menu ) ?>
+</ul>
+
+
+
