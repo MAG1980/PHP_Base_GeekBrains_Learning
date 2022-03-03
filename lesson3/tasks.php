@@ -104,3 +104,40 @@ foreach ( $regions as $region => $cities ) {
 echo 'Задание 4:' . PHP_EOL;
 
 include './alfavit.php';
+
+function translate( $str, $dictionary )
+{
+    echo 'Длина строки ' . $strLength . ' <br>';
+    for ( $k = 0; $k < mb_strlen( $str ); $k++ ) {
+        $letter = mb_substr( $str, $k, 1 );
+        echo $letter . " - буква №$k <br>";
+        $letterToLowerCase = mb_strtolower( $letter );
+        echo $letterToLowerCase . " - буква №$k в нижнем регистре <br>";
+        if ( $dictionary[ $letterToLowerCase ] ) {
+            $upperCase = !( $letterToLowerCase === $letter );
+            echo $letter . ' $letter <br>';
+            echo $upperCase . ' $upperCase <br>';
+            $str = mb_substr_replace( $str, $upperCase, mb_strlen( $str ), $dictionary[ $letterToLowerCase ], $k );
+//            echo "Строка после замены буквы - $str <br>";
+        }
+        else {
+            continue;
+        }
+    }
+    return $str;
+}
+
+//Нативная функция mb_substr_replace() в PHP отсутствует, поэтому пришлось искать кастомную
+function mb_substr_replace( string $string, bool $upperCase, int $strLength, string $newSymbol, int $newSymbolPosition ):
+string
+{
+    echo "mb_substr_replace " . $string . " " . $strLength . " " . $newSymbol . " " . $newSymbolPosition . "<br>";
+    $startString = mb_substr( $string, 0, $newSymbolPosition );
+    $newSymbol = $upperCase ? mb_strtoupper( $newSymbol ) : $newSymbol;
+    $endString = mb_substr( $string, $newSymbolPosition + 1, $strLength - 1 );
+    echo "mb_substr_replace return: " . $startString . ' $startString ' . $newSymbol . ' $newSymbol ' . $endString .
+        ' $endString ' . "<br>";
+    return $newString = $startString . $newSymbol . $endString;
+}
+
+echo translate( 'Хочу щаВеля', $alfabet );
