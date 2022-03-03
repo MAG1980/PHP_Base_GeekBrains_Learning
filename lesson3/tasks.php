@@ -128,3 +128,19 @@ function spacesToUnderscore( $search, $replace, string $string ): string
 $stringTack5 = 'Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку. Можно через str_replace.';
 echo "Оригинальная строка: $stringTack5<br>" . "Изменённая строка: " . spacesToUnderscore( ' ', '_', $stringTack5 )
     . '<br>';
+?>
+<?= '<br>' ?>
+<?php
+
+echo '<br>Задание 7:<br>';
+
+for ( $l = 0; $l <= 10; print( $l++ ) . " " ) {
+};
+?>
+<?= '<br>' ?>
+<?php
+for ( $l = 0; $l <= 10; print( "$l " ), $l++ ) {
+};
+?>
+<?= '<br>' ?>
+<?php
