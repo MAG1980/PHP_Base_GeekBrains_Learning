@@ -164,3 +164,8 @@ foreach ( $regions as $region => $cities ) {
 ?>
 <?= '<br>' ?>
 <?php
+echo '<br>Задание 9:<br>';
+function spacesToUnderscoreTranslate($search, $replace,  $str,  $dictionary):string{
+return translate(spacesToUnderscore( $search, $replace,  $str ),  $dictionary) ;
+}
+echo spacesToUnderscoreTranslate (" ", "_", $stringTack5, $alfabet);
