@@ -144,3 +144,23 @@ for ( $l = 0; $l <= 10; print( "$l " ), $l++ ) {
 ?>
 <?= '<br>' ?>
 <?php
+echo '<br>Задание 8:<br>';
+
+foreach ( $regions as $region => $cities ) {
+    $finalString = '';
+    for ( $j = 0, $arrLength = count( $cities ); $j < $arrLength; $j++ ) {
+        $citiesString = &$finalString;
+        $city = $cities[ $j ];
+        if (mb_substr($city, 0, 1) === "К"){
+            $citiesString .=  $city . ', ';
+        } else {
+            continue;
+        }
+    }
+
+    $finalString = substr_replace( $finalString, '.', -2, 2 );
+    echo $region . ': ' . $finalString . '<br>';
+}
+?>
+<?= '<br>' ?>
+<?php
