@@ -617,4 +617,6 @@ print также можно использовать без скобок (это
 
 Лекция №4
 
+phpStorm Beatyfy ctrl+alt+L
+
 
