@@ -92,7 +92,7 @@ function translate( string $str, array $dictionary ): string
     for ( $k = 0; $k < mb_strlen( $str ); $k++ ) {
         $letter = mb_substr( $str, $k, 1 );
         $letterToLowerCase = mb_strtolower( $letter );
-        if ( $dictionary[ $letterToLowerCase ] ) {
+        if ( isset ( $dictionary[ $letterToLowerCase ] ) ) {
             $upperCase = !( $letterToLowerCase === $letter );
             $str = mb_substr_replace( $str, $upperCase, mb_strlen( $str ), $dictionary[ $letterToLowerCase ], $k );
         } else {
