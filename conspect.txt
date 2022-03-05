@@ -602,6 +602,9 @@ for (…){ // здесь пусто}
 
 !str_replace() - str_replace — Заменяет все вхождения строки поиска на строку замены.
 
+!strtr(string $string, string $from, string $to): string - Преобразует заданные символы или заменяет подстроки. Подходит для преобразования текста в URL.
+!strtr(string $string, array $replace_pairs): string - альтернативный вариант работает с массивами.
+
 !is_array(mixed $value): bool - Определяет, является ли данная переменная массивом.
 
 ! echo vs print

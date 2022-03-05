@@ -1,32 +1,74 @@
 <?php
-$menu =
-	[ 'Главная' => '/link1',
-		'Каталог' =>
+$menu = [
+	[
+		'url' => '/link1',
+		'name' => 'Главная' ],
+	[
+		'url' => '/catalog',
+		'name' => "Каталог",
+		'submenu' => [
 			[
-				'Яблоко' => '../img/apple.jpg',
-				'Пицца' => '../img/pizza.jpg',
-				'Чай' => '../img/tea.jpg',
+				'url' => '../img/apple.jpg',
+				'name' => 'Яблоко'
 			],
-		'Галерея работ' =>
 			[
-				'Работа 1' => '/work1',
-				'Работа 2' => '/work2',
-				'Работа 3' => '/work3',
+				'url' => '../img/pizza.jpg',
+				'name' => 'Пицца'
 			],
-		'Контакты' => '/link4',
-		'О нас' => '/link5',
-	];
+			[
+				'url' => '../img/tea.jpg',
+				'name' => 'Чай'
+			],
+		]
+	],
+	[
+		'url' => '/gallery',
+		'name' => 'Галерея работ',
+		'submenu' => [
+			[
+				'url' => '/work1',
+				'name' => 'Работа 1',
+			],
+			[
+				'url' => '/work2',
+				'name' => 'Работа 2',
+			],
+			[
+				'url' => '/work3',
+				'name' => 'Работа 3',
+			]
+		]
+	],
+	[
+		'url' => '/link4',
+		'name' => 'Контакты'
+	],
+	[
+		'url' => '/link5',
+		'name' => 'О нас'
+	]
+];
 
 function renderMenu( array $menu )
 {
 	$menuTemplate = '';
-	foreach ( $menu as $menuItem => $menuLink ) {
-		if ( is_array( $menuLink ) ) {
-			$item = '<li>' . $menuItem . '<ul>' . renderMenu( $menuLink ) . '</ul></li>';
-		} else {
-			$item = '<li><a href="' . $menuLink . '">' . $menuItem . '</a></li>';
-		}
-		$menuTemplate .= $item;
+	foreach ( $menu as $menuItem ) {
+		$subMenu = '';
+		$menuItemSubMenu = is_array( $menuItem[ 'submenu' ] ) ? '<ul>' . renderMenu( $menuItem[ 'submenu' ] ) . '</ul>' : '';
+		$menuItemLink = isset( $menuItem[ 'url' ] ) ? '<a href=' . $menuItem[ 'url' ] . ' "> ' . $menuItem[ 'name' ] . '</a>' : '';
+//		if ( is_array( $menuItem[ 'submenu' ] ) ) {
+//			$menuItemSubMenu = '<ul>' . renderMenu( $menuItem[ 'submenu' ] ) . '</ul>';
+//		} else {
+//			$menuItemSubMenu = '';
+//		}
+//		if ( isset( $menuItem[ 'url' ] ) ) {
+//			$menuItemLink = '<a href=' . $menuItem[ 'url' ] . ' "> ' . $menuItem[ 'name' ] . '</a>';
+//		} else {
+//			$menuItemLink = '';
+//		}
+		$menuItemTemplate = '<li>' . $menuItemLink . $menuItemSubMenu . '</li>';
+
+		$menuTemplate .= $menuItemTemplate;
 	}
 	return $menuTemplate;
 }
@@ -37,10 +79,4 @@ function renderMenu( array $menu )
 	<?= renderMenu( $menu ) ?>
 </ul>
 
-<ul>
-	<?php foreach ( $menu as $menuItem => $menuLink ): ?>
 
-		<li><a href="<?= $menuLink ?>"><?= $menuItem ?></a></li>
-
-	<?php endforeach; ?>
-</ul>
