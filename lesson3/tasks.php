@@ -31,15 +31,14 @@ do {
 
 echo '<br>Задание 2 вариант 2:<br>';
 
-define( 'EVEN', 1 << 1 );
 $i = 0;
 do {
     if ( $i === 0 ) {
-        echo $i . " - ноль." . PHP_EOL;
-    } else if ( $i & EVEN ) {
-        echo $i . " - четное число." . PHP_EOL;
+        echo $i . " - ноль.<br>";
+    } else if ( !( $i & 1 ) ) {
+        echo $i . " - четное число.<br>";
     } else {
-        echo $i . " - нечетное число." . PHP_EOL;
+        echo $i . " - нечетное число.<br>";
     }
     $i++;
 } while ( $i <= 10 );
@@ -151,13 +150,12 @@ foreach ( $regions as $region => $cities ) {
     for ( $j = 0, $arrLength = count( $cities ); $j < $arrLength; $j++ ) {
         $citiesString = &$finalString;
         $city = $cities[ $j ];
-        if (mb_substr($city, 0, 1) === "К"){
-            $citiesString .=  $city . ', ';
+        if ( mb_substr( $city, 0, 1 ) === "К" ) {
+            $citiesString .= $city . ', ';
         } else {
             continue;
         }
     }
-
     $finalString = substr_replace( $finalString, '.', -2, 2 );
     echo $region . ': ' . $finalString . '<br>';
 }
@@ -165,7 +163,9 @@ foreach ( $regions as $region => $cities ) {
 <?= '<br>' ?>
 <?php
 echo '<br>Задание 9:<br>';
-function spacesToUnderscoreTranslate($search, $replace,  $str,  $dictionary):string{
-return translate(spacesToUnderscore( $search, $replace,  $str ),  $dictionary) ;
+function spacesToUnderscoreTranslate( $search, $replace, $str, $dictionary ): string
+{
+    return translate( spacesToUnderscore( $search, $replace, $str ), $dictionary );
 }
-echo spacesToUnderscoreTranslate (" ", "_", $stringTack5, $alfabet);
+
+echo spacesToUnderscoreTranslate( " ", "_", $stringTack5, $alfabet );
