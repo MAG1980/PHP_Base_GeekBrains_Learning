@@ -1,19 +1,28 @@
 <?php
+//Дла решения проблемы безопасности значения переменной $message хранятся в массиве по ключу query-параметра.
+//Теперь скрипт сможет обрабатывать только параметры, хранящиеся в ключах $status.
+$status =
+	[
+		'OK' => 'Файл загружен!',
+		'ERROR' => 'Ошибка загрузки!'
+	];
 if ( !empty ( $_FILES ) ) {
 	$path = $_SERVER[ 'DOCUMENT_ROOT' ] . '/upload/' . $_FILES[ 'myfile' ][ 'name' ];
 	var_dump( $path );
 	if ( move_uploaded_file( $_FILES[ 'myfile' ][ 'tmp_name' ], $path ) ) {
-		$message = 'Файл загружен!';
+		$message = 'OK';
 
 	} else {
-		$message = 'Ошибка загрузки!';
+		$message = 'ERROR';
 	};
 
-	header( "Location: index.php?message=$message" ); // Location позволяет осуществить редирект на указанную страницу
-	//Использую query параметр ?message для передачи значения $message на страницу редиректа
+	header( "Location: index.php?status=$message" ); // Location позволяет осуществить редирект на указанную страницу
+	//Использую query параметр ?status для передачи значения $message на страницу редиректа
 	die();
 }
-$message = $_GET[ 'message' ];
+
+//Получаю текст сообщения из массива $status по ключу, указанному в query-параметре 'status', полученному из $_GET.
+$message = $status[ $_GET[ 'status' ] ];
 ?>
 
 <!doctype html>
