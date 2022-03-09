@@ -1,47 +1,54 @@
 <?php
-//Дла решения проблемы безопасности значения переменной $message хранятся в массиве по ключу query-параметра.
-//Теперь скрипт сможет обрабатывать только параметры, хранящиеся в ключах $status.
-$status =
-	[
-		'OK' => 'Файл загружен!',
-		'ERROR' => 'Ошибка загрузки!'
-	];
-if ( !empty ( $_FILES ) ) {
-	$path = $_SERVER[ 'DOCUMENT_ROOT' ] . '/upload/' . $_FILES[ 'myfile' ][ 'name' ];
-	var_dump( $path );
-	if ( move_uploaded_file( $_FILES[ 'myfile' ][ 'tmp_name' ], $path ) ) {
-		$message = 'OK';
+define( 'ROOT', $_SERVER[ 'DOCUMENT_ROOT' ] );
+define( 'GALLERY_SMALL_PATH', ROOT . '/img/small/' );
+define( 'GALLERY_BIG_PATH', ROOT . '/img/big/' );
+$smallImagesPath = '/img/small/';
 
-	} else {
-		$message = 'ERROR';
-	};
+$images = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
 
-	header( "Location: index.php?status=$message" ); // Location позволяет осуществить редирект на указанную страницу
-	//Использую query параметр ?status для передачи значения $message на страницу редиректа
-	die();
+function renderImagesGallery( array $images, string $imagesPath ): string
+{
+	$ImagesGallery = "";
+	foreach ( $images as $image ) {
+		$ImagesGallery .=
+			'<a href="/img/big/' . $image . '">
+			<img class="gallery__small-img" src="' . $imagesPath . $image . '" width="300" alt="' . $image . '">
+		</a>';
+	}
+	return $ImagesGallery;
 }
 
-//Получаю текст сообщения из массива $status по ключу, указанному в query-параметре 'status', полученному из $_GET.
-$message = $status[ $_GET[ 'status' ] ];
-?>
 
+?>
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<link rel="stylesheet" href="/css/styles.css">
+	<title>Gallery</title>
 </head>
 <body>
+<h1 class="heading__title">Галерея фотографий</h1>
+<section class="section__gallery">
+	<div class="gallery__layout">
+		<?= renderImagesGallery( $images, $smallImagesPath ) ?>
+	</div>
 
-<form method="post" enctype="multipart/form-data" action="index.php">
-	<input type="file" name="myfile">
-	<input type="submit" value="Отправить файл">
-</form>
-<p>
-	<?= $message ?>
-</p>
+</section>
+
+<section class="section__form">
+	<h2>Форма для загрузки нового изображений галерею</h2>
+	<form class="form" method="post" action="index.php" enctype="multipart/form-data">
+		<label for="small-file">Загрузить превью изображения</label>
+		<input class="form__input" type="file" name="small-file">
+		<label for="big-file">Загрузить изображение</label>
+		<input class="form__input" type="file" name="big-file">
+		<input type="submit" value="Отправить файлы на сервер">
+	</form>
+</section>
+
 </body>
 </html>

@@ -927,3 +927,11 @@ include должены быть в самом начале файла.
 
 
 Загружаемые файлы проверять на безопасность.
+
+!array_slice(
+     array $array,
+     int $offset,
+     ?int $length = null,
+     bool $preserve_keys = false
+ ): array
+ array_slice() возвращает последовательность элементов массива array, определённую параметрами offset и length.
