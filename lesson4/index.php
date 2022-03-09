@@ -1,10 +1,40 @@
 <?php
+include 'classSimpleImage.php';
 define( 'ROOT', $_SERVER[ 'DOCUMENT_ROOT' ] );
 define( 'GALLERY_SMALL_PATH', ROOT . '/img/small/' );
 define( 'GALLERY_BIG_PATH', ROOT . '/img/big/' );
 $smallImagesPath = '/img/small/';
+$formMessage = '';
+
+$uploading =
+	[
+		'ok' => "Загрузка прошла успешно!",
+		'error' => 'Ошибка загрузки!'
+	];
 
 $images = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
+
+$formMessage = $uploading[ $_GET[ 'status' ] ];
+var_dump( $formMessage );
+
+if ( !empty( $_FILES ) ) {
+	$uploadingStatus = uploadFileWithChecking(
+		$_FILES[ 'picture' ][ 'tmp_name' ],
+		GALLERY_BIG_PATH . $_FILES[ 'picture' ][ 'name' ]
+	);
+
+	$status = $uploadingStatus ? 'ok' : 'error';
+
+	if ( $uploadingStatus ) {
+		imageResizeAndCopy(
+			GALLERY_BIG_PATH . $_FILES[ 'picture' ][ 'name' ],
+			GALLERY_SMALL_PATH . $_FILES[ 'picture' ][ 'name' ]
+		);
+	}
+	header( 'Location: index.php?status=' . $status );
+	$formMessage = $uploading[ $_GET[ 'status' ] ];
+	die();
+}
 
 function renderImagesGallery( array $images, string $imagesPath ): string
 {
@@ -18,7 +48,24 @@ function renderImagesGallery( array $images, string $imagesPath ): string
 	return $ImagesGallery;
 }
 
+function uploadFileWithChecking( $file, $path ): bool
+{
+	if ( $_FILES[ 'picture' ][ 'size' ] > 512000 || $_FILES[ 'picture' ][ 'type' ] != 'image/jpeg' ) {
+		return false;
+	} else {
+		return ( move_uploaded_file( $file, $path ) );
+	}
+}
 
+function imageResizeAndCopy( string $oldPath, string $newPath ): void
+{
+	$image = new SimpleImage();
+	$image -> load( $oldPath );
+	$image -> resizeToWidth( 250 );
+	$image -> save( $newPath );
+}
+
+var_dump( $_FILES );
 ?>
 <!doctype html>
 <html lang="ru">
@@ -32,6 +79,15 @@ function renderImagesGallery( array $images, string $imagesPath ): string
 </head>
 <body>
 <h1 class="heading__title">Галерея фотографий</h1>
+<section class="section__form">
+	<h2>Форма для загрузки нового изображений галерею</h2>
+	<form class="form" method="post" action="index.php" enctype="multipart/form-data">
+		<label for="small-file">Загрузить изображение</label>
+		<input class="form__input" type="file" name="picture">
+		<p class="form__message"><?= $formMessage ?></p>
+		<input type="submit" value="Отправить на сервер">
+	</form>
+</section>
 <section class="section__gallery">
 	<div class="gallery__layout">
 		<?= renderImagesGallery( $images, $smallImagesPath ) ?>
@@ -39,16 +95,6 @@ function renderImagesGallery( array $images, string $imagesPath ): string
 
 </section>
 
-<section class="section__form">
-	<h2>Форма для загрузки нового изображений галерею</h2>
-	<form class="form" method="post" action="index.php" enctype="multipart/form-data">
-		<label for="small-file">Загрузить превью изображения</label>
-		<input class="form__input" type="file" name="small-file">
-		<label for="big-file">Загрузить изображение</label>
-		<input class="form__input" type="file" name="big-file">
-		<input type="submit" value="Отправить файлы на сервер">
-	</form>
-</section>
 
 </body>
 </html>
