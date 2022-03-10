@@ -6,8 +6,8 @@ function renderImagesGallery( array $images, string $imagesPath ): string
     $ImagesGallery = "";
     foreach ( $images as $image ) {
         $ImagesGallery .=
-            '<a href="/img/big/' . $image . '">
-			<img class="gallery__small-img" src="' . $imagesPath . $image . '" width="300" alt="' . $image . '">
+            '<a href="/img/gallery/big/' . $image . '">
+			<img class="gallery__small-img" src="' . $imagesPath . $image . '" alt="' . $image . '">
 		</a>';
     }
     return $ImagesGallery;
@@ -29,4 +29,16 @@ function imageResizeAndCopy( string $oldPath, string $newPath ): void
     $image -> resizeToWidth( 250 );
     $image -> save( $newPath );
 }
+
+function getFormMessage( $status )
+{
+    $uploading =
+        [
+            'ok' => "Загрузка прошла успешно!",
+            'error' => 'Ошибка загрузки!'
+        ];
+
+    return $uploading[ $status ];
+}
+
 
