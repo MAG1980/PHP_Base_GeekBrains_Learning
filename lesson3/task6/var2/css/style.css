@@ -1,0 +1,9 @@
+body {
+	background-color: aqua;
+}
+
+.menu_nav {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-evenly;
+}
