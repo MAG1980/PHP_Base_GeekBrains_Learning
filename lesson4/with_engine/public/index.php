@@ -51,7 +51,8 @@ switch ( $page ){
             header( 'Location: /?page=gallery&status=' . $status );
             die();
         }
-
+        
+        $images = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
         $params[ 'title' ] = 'Галерея фотографий';
         $params[ 'content' ] = renderImagesGallery( $images, $smallImagesPath );
         $params[ 'formMessage' ] = getFormMessage( $_GET[ 'status' ] );
