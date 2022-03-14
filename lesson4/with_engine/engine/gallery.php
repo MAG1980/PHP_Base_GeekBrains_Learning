@@ -1,5 +1,4 @@
 <?php
-include '../libs/classSimpleImage.php';
 
 function renderImagesGallery( array $images, string $imagesPath ): string
 {
