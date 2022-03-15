@@ -38,7 +38,7 @@ switch ( $page ){
 
         $images = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
         $params[ 'title' ] = 'Галерея фотографий';
-        $params[ 'content' ] = renderImagesGallery( $images, $smallImagesPath );
+        $params[ 'content' ] = $images;
         $params[ 'formMessage' ] = getFormMessage( $_GET[ 'status' ] );
         break;
 

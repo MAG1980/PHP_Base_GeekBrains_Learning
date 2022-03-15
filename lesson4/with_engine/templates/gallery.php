@@ -10,6 +10,10 @@
 </section>
 <section class="section__gallery">
 	<div class="gallery__layout">
-		<?= $content ?>
+		<?php foreach ( $content as $image ): ?>
+			<a href="/img/gallery/big/<?= $image ?>">
+				<img class="gallery__small-img" src="/img/gallery/small/<?= $image ?>" alt="<?= $image ?>">
+			</a>
+		<? endforeach ?>
 	</div>
 </section>
