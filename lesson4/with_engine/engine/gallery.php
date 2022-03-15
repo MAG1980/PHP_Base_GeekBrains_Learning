@@ -19,18 +19,6 @@ function imagesUpload()
     die();
 }
 
-function renderImagesGallery( array $images, string $imagesPath ): string
-{
-    $ImagesGallery = "";
-    foreach ( $images as $image ) {
-        $ImagesGallery .=
-            '<a href="/img/gallery/big/' . $image . '">
-			<img class="gallery__small-img" src="' . $imagesPath . $image . '" alt="' . $image . '">
-		</a>';
-    }
-    return $ImagesGallery;
-}
-
 function uploadFileWithChecking( $file, $path ): bool
 {
     if ( $_FILES[ 'picture' ][ 'size' ] > 1024000 || $_FILES[ 'picture' ][ 'type' ] != 'image/jpeg' ) {
