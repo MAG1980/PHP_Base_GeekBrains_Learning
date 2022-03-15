@@ -33,25 +33,9 @@ switch ( $page ){
 
     case 'gallery':
         if ( !empty( $_FILES ) ) {
-            var_dump( $_FILES );
-            $uploadingStatus = uploadFileWithChecking(
-                $_FILES[ 'picture' ][ 'tmp_name' ],
-                GALLERY_BIG_PATH . $_FILES[ 'picture' ][ 'name' ]
-            );
-
-            if ( $uploadingStatus ) {
-                imageResizeAndCopy(
-                    GALLERY_BIG_PATH . $_FILES[ 'picture' ][ 'name' ],
-                    GALLERY_SMALL_PATH . $_FILES[ 'picture' ][ 'name' ]
-                );
-            }
-
-            $status = $uploadingStatus ? 'ok' : 'error';
-
-            header( 'Location: /?page=gallery&status=' . $status );
-            die();
+            imagesUpload();
         }
-        
+
         $images = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
         $params[ 'title' ] = 'Галерея фотографий';
         $params[ 'content' ] = renderImagesGallery( $images, $smallImagesPath );
