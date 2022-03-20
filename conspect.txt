@@ -1151,4 +1151,28 @@ if ($result -> num_rows !== 0):
 !Защита от sql-инъекций
 $id = (int)$_GET[ 'id' ]; - явное приведение типа к числу не позволит выполнить текстовый запрос
 
+!filesize(string $filename): int|false - Возвращает размер указанного файла, где filename -  путь к файлу.
 
+!pg_insert(
+     PgSql\Connection $connection,
+     string $table_name,
+     array $values,
+     int $flags = PGSQL_DML_EXEC
+ ): PgSql\Result|string|bool
+ pg_insert() вставляет записи из массива values в таблицу table_name.
+
+ !array_map(?callable $callback, array $array, array ...$arrays): array
+ Функция array_map() возвращает массив (array), содержащий результаты применения callback-функции к соответствующему элементу array (и arrays, если указано больше массивов), используемого в качестве аргумента callback-функции. Количество параметров, передаваемых callback-функции, должно совпадать с количеством массивов, переданным функции array_map(). Лишние входные массивы игнорируются. Если предоставлено недостаточное количество аргументов, выбрасывается ArgumentCountError.
+ Список параметров ¶
+ callback callable, применяемая к каждому элементу в каждом массиве.
+ null может быть передан в качестве значения callback для выполнения zip операции с несколькими массивами. Если указан только array, array_map() вернёт входной массив.
+ array Массив, к которому применяется callback-функция.
+ arrays Дополнительные массивы для обработки callback-функцией.
+
+ !Синтаксис query-запросов (кавычки вокруг переменных):
+   $result = mysqli_query( $db, "INSERT INTO images (name) VALUES  ('{$item['name']}')" );
+
+  В идеале тут не в цикле запрос выполнять, а собрать в строке, и потом одним insert вставить в БД:
+
+  $images = array_splice(scandir(IMG_BIG), 2);
+      mysqli_query($db,"INSERT INTO images(filename) VALUES ('" . implode("'),('", $images) . "')");
