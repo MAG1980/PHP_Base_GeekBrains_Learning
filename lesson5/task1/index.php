@@ -1,7 +1,12 @@
 <?php
 include_once 'db.php';
 $result = mysqli_query( $db, "SELECT * FROM news WHERE id>0" );
-
+if ($_GET[ 'action' ] === 'delete') {
+	$id = (int)$_GET [ 'id' ];
+	$result = mysqli_query( $db, "DELETE  FROM news WHERE id={$id}" );
+	header( "Location: /" ); //редирект нужен для очистки строки адреса браузера
+	die();                         //для корректной работы скрипта
+}
 ?>
 
 <!doctype html>
@@ -35,6 +40,7 @@ $result = mysqli_query( $db, "SELECT * FROM news WHERE id>0" );
 if ($result -> num_rows !== 0):
 	while ($row = mysqli_fetch_assoc( $result )): ?>
 		<a href="/news.php?id=<?= $row[ 'id' ] ?>"><h3><?= $row[ 'title' ] ?></h3></a>
+		<a href="/?id=<?= $row[ 'id' ] ?>&action=delete">x</a>
 		<hr>
 	<?php endwhile; ?>
 <?php else : ?>
