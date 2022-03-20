@@ -8,3 +8,5 @@ ctrl+R - поиск с заменой
 Alt+Enter - настройки форматирования выделенного текста
 
 [CTRL] + [ALT] + L и IDE отформатирует код в соответствии с настройками (Preferences -> Project Settings -> Code Style -> PHP)
+
+ctrl + F12 - terminal

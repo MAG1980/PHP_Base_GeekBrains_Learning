@@ -3,12 +3,12 @@ include "../config/config.php";
 
 $page = 'index';
 
-if ( isset( $_GET[ 'page' ] ) ) {
+if (isset( $_GET[ 'page' ] )) {
     $page = $_GET[ 'page' ];
 }
 $params = [];
 
-switch ( $page ){
+switch ($page){
     case 'index':
         $params[ 'title' ] = 'Главная';
         break;
@@ -32,7 +32,7 @@ switch ( $page ){
         break;
 
     case 'gallery':
-        if ( !empty( $_FILES ) ) {
+        if (!empty( $_FILES )) {
             imagesUpload();
         }
 
