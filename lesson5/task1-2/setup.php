@@ -3,12 +3,12 @@ include "config/config.php";
 $db = mysqli_connect( 'lesson5:3307', 'test', '12345', 'test' );
 $smallImages = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
 $bigImages = array_slice( scandir( GALLERY_BIG_PATH ), 2 );
-
+var_dump( $smallImages );
 $newArr = array_map( function( $image ) {
     return [
         'name' => $image,
-        'path_to_small' => GALLERY_SMALL_PATH,
-        'path_to_big' => GALLERY_BIG_PATH,
+        'path_to_small' => GALLERY_SMALL_PUBLIC_PATH,
+        'path_to_big' => GALLERY_BIG_PUBLIC_PATH,
         'small_Size' => filesize( GALLERY_SMALL_PATH . $image ),
         'big_Size' => filesize( GALLERY_BIG_PATH . $image )
     ];
@@ -21,4 +21,5 @@ foreach ($newArr as $item) {
 
 header( "Location: /" ); //редирект нужен для очистки строки адреса браузера
 die();
+
 

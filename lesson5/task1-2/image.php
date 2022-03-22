@@ -2,10 +2,10 @@
 include_once 'db.php';
 
 $id = (int)$_GET[ 'id' ];
-$result = mysqli_query( $db, "SELECT * FROM news WHERE id={$id}" );
+$result_img = mysqli_query( $db, "SELECT * FROM images WHERE id={$id}" );
 
-if ($result -> num_rows !== 0) {
-	$article = mysqli_fetch_assoc( $result );
+if ($result_img -> num_rows !== 0) {
+	$image = mysqli_fetch_assoc( $result_img );
 } else {
 	header( 'Location: /404.php' );
 	die( 'Error' );
@@ -22,7 +22,7 @@ if ($result -> num_rows !== 0) {
 	<title>Document</title>
 </head>
 <body>
-<h1><?= $article[ 'title' ] ?></h1>
-<p><?= $article[ 'content' ] ?></p>
+<h1><?= $image[ 'name' ] ?></h1>
+<img src="<?= $image[ 'path_to_big' ] . $image[ 'name' ] ?>"><?= $image[ 'name' ] ?></img>
 </body>
 </html>
