@@ -26,6 +26,11 @@
 	object-fit: cover;
 }
 
+.gallery__small-picture {
+	width: 250px;
+	object-fit: cover;
+}
+
 .section__form {
 	display: flex;
 	flex-direction: column;
@@ -48,4 +53,11 @@
 .form__input {
 	display: block;
 	margin: 0 0 10px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-height: 100vh;
 }

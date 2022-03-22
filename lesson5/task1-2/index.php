@@ -108,12 +108,15 @@ function imageResizeAndCopy( string $oldPath, string $newPath ): void
 			<?php
 			if ($result_images -> num_rows !== 0):
 				while ($row = mysqli_fetch_assoc( $result_images )): ?>
-					<a href="/image.php?id=<?= $row[ 'id' ] ?>">
-						<h3><?= $row[ 'name' ] ?></h3>
-						<img class="gallery__small-img" src="<?= $row[ 'path_to_small' ] . $row[ 'name' ] ?>"
-						     alt="<?= $row[ 'name' ] ?>">
-					</a>
-					<a href="/?id=<?= $row[ 'id' ] ?>&action=delete">x</a>
+					<div class="card">
+						<a class="gallery__small-img" href="/image.php?id=<?= $row[ 'id' ] ?>">
+							<h3>Название файла: <?= $row[ 'name' ] ?></h3>
+							<img class="gallery__small-picture" src="<?= $row[ 'path_to_small' ] . $row[ 'name' ] ?>"
+							     alt="<?= $row[ 'name' ] ?>">
+						</a>
+						<a href="/?id=<?= $row[ 'id' ] ?>&action=delete">x</a>
+						<p>Количество просмотров: <?= $row[ 'views' ] ?></p>
+					</div>
 				<?php endwhile; ?>
 			<?php else : ?>
 				<p>Ошибка</p>
