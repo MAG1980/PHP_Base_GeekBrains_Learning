@@ -3,7 +3,7 @@ include "config/config.php";
 $db = mysqli_connect( 'lesson5:3307', 'test', '12345', 'test' );
 $smallImages = array_slice( scandir( GALLERY_SMALL_PATH ), 2 );
 $bigImages = array_slice( scandir( GALLERY_BIG_PATH ), 2 );
-var_dump( $smallImages );
+
 $newArr = array_map( function( $image ) {
     return [
         'name' => $image,
