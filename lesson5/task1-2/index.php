@@ -8,7 +8,7 @@ $image_name = $_FILES[ 'picture' ][ 'name' ];
 $small_img_size = filesize( GALLERY_SMALL_PATH . $image_name );
 $big_img_size = filesize( GALLERY_BIG_PATH . $image_name );
 
-$result_images = mysqli_query( $db, "SELECT * FROM images WHERE id>0" );
+$result_images = mysqli_query( $db, "SELECT * FROM images  WHERE id>0 ORDER BY views DESC" );
 
 if ($_GET[ 'action' ] === 'delete') {
 	$id = (int)$_GET [ 'id' ];

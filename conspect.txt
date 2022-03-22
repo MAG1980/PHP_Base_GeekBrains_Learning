@@ -1176,3 +1176,6 @@ $id = (int)$_GET[ 'id' ]; - явное приведение типа к числ
 
   $images = array_splice(scandir(IMG_BIG), 2);
       mysqli_query($db,"INSERT INTO images(filename) VALUES ('" . implode("'),('", $images) . "')");
+
+ !Пример SQL-запроса на обновление данных в БД:
+  mysqli_query( $db, "UPDATE images  SET views = views + 1 WHERE id = {$id}" );
