@@ -2,11 +2,13 @@
 include_once 'db.php';
 
 $id = (int)$_GET[ 'id' ];
+mysqli_query( $db, "UPDATE images  SET views = views + 1 WHERE id = {$id}" );
 $result_img = mysqli_query( $db, "SELECT * FROM images WHERE id={$id}" );
 
 if ($result_img -> num_rows !== 0) {
+
 	$image = mysqli_fetch_assoc( $result_img );
-	mysqli_query( $db, "UPDATE images  SET views = views + 1 WHERE id = {$id}" );
+
 } else {
 	header( 'Location: /404.php' );
 	die( 'Error' );
