@@ -63,7 +63,7 @@ function getFormMessage( $status )
 
 function getImages()
 {
-    return getAssocResult( "SELECT id, name FROM images" );
+    return getAssocResult( "SELECT id, name, views FROM images" );
 }
 
 function getOneImage( $id )

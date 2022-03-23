@@ -3,17 +3,17 @@
 include "config/config.php";
 $small_img_path = GALLERY_SMALL_PUBLIC_PATH;
 $big_img_path = GALLERY_BIG_PUBLIC_PATH;
-$image_name = $_FILES[ 'picture' ][ 'name' ];
+$image_name = $_FILES['picture']['name'];
 
-$small_img_size = filesize( GALLERY_SMALL_PATH . $image_name );
-$big_img_size = filesize( GALLERY_BIG_PATH . $image_name );
+$small_img_size = filesize(GALLERY_SMALL_PATH . $image_name);
+$big_img_size = filesize(GALLERY_BIG_PATH . $image_name);
 
-$result_images = mysqli_query( $db, "SELECT * FROM images  WHERE id>0 ORDER BY views DESC" );
+$result_images = mysqli_query($db, "SELECT * FROM images ORDER BY views DESC");
 
-if ($_GET[ 'action' ] === 'delete') {
-	$id = (int)$_GET [ 'id' ];
-	$result_images = mysqli_query( $db, "DELETE  FROM images WHERE id={$id}" );
-	header( "Location: /" ); //редирект нужен для очистки строки адреса браузера
+if ($_GET['action'] === 'delete') {
+	$id = (int)$_GET ['id'];
+	$result_images = mysqli_query($db, "DELETE  FROM images WHERE id={$id}");
+	header("Location: /"); //редирект нужен для очистки строки адреса браузера
 	die();                         //для корректной работы скрипта
 }
 
@@ -21,11 +21,11 @@ if ($_GET[ 'action' ] === 'delete') {
 $formMessage = '';
 
 
-$formMessage = $uploading[ $_GET[ 'status' ] ];
+$formMessage = $uploading[$_GET['status']];
 
-if (!empty( $_FILES )) {
+if (!empty($_FILES)) {
 	$uploadingStatus = uploadFileWithChecking(
-		$_FILES[ 'picture' ][ 'tmp_name' ],
+		$_FILES['picture']['tmp_name'],
 		GALLERY_BIG_PATH . $image_name
 	);
 
@@ -37,44 +37,30 @@ if (!empty( $_FILES )) {
 			GALLERY_SMALL_PATH . $image_name
 		);
 
-		mysqli_query( $db, "INSERT INTO `images`(`name`, `path_to_small`, `path_to_big`, `small_size`, `big_Size` )
+		mysqli_query($db, "INSERT INTO `images`(`name`, `path_to_small`, `path_to_big`, `small_size`, `big_Size` )
 VALUES
-       ('{$image_name}', '{$small_img_path}', '{$big_img_path}', '{$small_img_size}', '{$big_img_size}')" );
+       ('{$image_name}', '{$small_img_path}', '{$big_img_path}', '{$small_img_size}', '{$big_img_size}')");
 
 	}
-	header( 'Location: index.php?status=' . $status );
-	$formMessage = $uploading[ $_GET[ 'status' ] ];
+	header('Location: index.php?status=' . $status);
 	die();
 }
 
-function renderImagesGallery( array $result_images, string $imagesPath ): string
+function uploadFileWithChecking($file, $path): bool
 {
-	$ImagesGallery = "";
-	foreach ($result_images as $image) {
-		$ImagesGallery .=
-			'<a href="/img/big/' . $image . '">
-			<img class="gallery__small-img" src="' . $imagesPath . $image . '" width="300" alt="' . $image . '">
-		</a>';
-	}
-	return $ImagesGallery;
-}
-
-
-function uploadFileWithChecking( $file, $path ): bool
-{
-	if ($_FILES[ 'picture' ][ 'size' ] > 512000 || $_FILES[ 'picture' ][ 'type' ] != 'image/jpeg') {
+	if ($_FILES['picture']['size'] > 512000 || $_FILES['picture']['type'] != 'image/jpeg') {
 		return false;
 	} else {
-		return ( move_uploaded_file( $file, $path ) );
+		return (move_uploaded_file($file, $path));
 	}
 }
 
-function imageResizeAndCopy( string $oldPath, string $newPath ): void
+function imageResizeAndCopy(string $oldPath, string $newPath): void
 {
 	$image = new SimpleImage();
-	$image -> load( $oldPath );
-	$image -> resizeToWidth( 250 );
-	$image -> save( $newPath );
+	$image -> load($oldPath);
+	$image -> resizeToWidth(250);
+	$image -> save($newPath);
 }
 
 ?>
@@ -107,20 +93,20 @@ function imageResizeAndCopy( string $oldPath, string $newPath ): void
 		<div class="gallery__layout">
 			<?php
 			if ($result_images -> num_rows !== 0):
-				while ($row = mysqli_fetch_assoc( $result_images )): ?>
+				while ($row = mysqli_fetch_assoc($result_images)): ?>
 					<div class="card">
-						<a class="gallery__small-img" href="/image.php?id=<?= $row[ 'id' ] ?>">
-							<h3>Название файла: <?= $row[ 'name' ] ?></h3>
-							<img class="gallery__small-picture" src="<?= $row[ 'path_to_small' ] . $row[ 'name' ] ?>"
-							     alt="<?= $row[ 'name' ] ?>">
+						<a class="gallery__small-img" href="/image.php?id=<?= $row['id'] ?>">
+							<h3>Название файла: <?= $row['name'] ?></h3>
+							<img class="gallery__small-picture" src="<?= $row['path_to_small'] . $row['name'] ?>"
+							     alt="<?= $row['name'] ?>">
 						</a>
-						<a href="/?id=<?= $row[ 'id' ] ?>&action=delete">x</a>
-						<p>Количество просмотров: <?= $row[ 'views' ] ?></p>
+						<a href="/?id=<?= $row['id'] ?>&action=delete">x</a>
+						<p>Количество просмотров: <?= $row['views'] ?></p>
 					</div>
 				<?php endwhile; ?>
 			<?php else : ?>
 				<p>Ошибка</p>
-			<? endif ?>
+			<?php endif ?>
 		</div>
 	</section>
 </div>

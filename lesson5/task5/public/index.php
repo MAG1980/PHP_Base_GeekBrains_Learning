@@ -63,11 +63,16 @@ switch ($page){
         if (isset( $_POST[ 'load' ] )) {
             loadImage();
         }
-      
+
         $layout = 'gallery';
         $params[ 'gallery' ] = getImages();
         $params[ 'message' ] = getFormMessage( $_GET[ 'status' ] );
 
+        break;
+
+    case 'one_image_db':
+        $id = (int)$_GET[ 'id' ];
+        $params[ 'image' ] = getOneImage( $id );
         break;
 
 

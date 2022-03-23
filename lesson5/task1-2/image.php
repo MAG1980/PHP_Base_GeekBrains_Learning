@@ -1,17 +1,17 @@
 <?php
 include_once 'db.php';
 
-$id = (int)$_GET[ 'id' ];
-mysqli_query( $db, "UPDATE images  SET views = views + 1 WHERE id = {$id}" );
-$result_img = mysqli_query( $db, "SELECT * FROM images WHERE id={$id}" );
+$id = (int)$_GET['id'];
+mysqli_query($db, "UPDATE images  SET views = views + 1 WHERE id = {$id}");
+$result_img = mysqli_query($db, "SELECT * FROM images WHERE id={$id}");
 
 if ($result_img -> num_rows !== 0) {
 
-	$image = mysqli_fetch_assoc( $result_img );
+	$image = mysqli_fetch_assoc($result_img);
 
 } else {
-	header( 'Location: /404.php' );
-	die( 'Error' );
+	header('Location: /404.php');
+	die('Error');
 }
 
 ?>
@@ -28,9 +28,9 @@ if ($result_img -> num_rows !== 0) {
 <body>
 <section class="container">
 	<div class="card">
-		<h1>Название файла: <?= $image[ 'name' ] ?></h1>
-		<img src="<?= $image[ 'path_to_big' ] . $image[ 'name' ] ?>"><?= $image[ 'name' ] ?></img>
-		<p>Количество просмотров: <?= $image[ 'views' ] ?></p>
+		<h1>Название файла: <?= $image['name'] ?></h1>
+		<img src="<?= $image['path_to_big'] . $image['name'] ?>"><?= $image['name'] ?></img>
+		<p>Количество просмотров: <?= $image['views'] ?></p>
 	</div>
 </section>
 </body>
