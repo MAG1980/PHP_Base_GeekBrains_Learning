@@ -76,11 +76,11 @@ if (!empty($_GET['errors'])) { ?>
 <!-- Преднамеренное нарушение принципа идемпотентности для наглядности в строке браузера-->
 <form action="" method="get">
 	<input type="text" name="arg1" value="<?= $arg1 ?>">
-	<select name="operation" value="<?= $_GET['operation'] ?>">
-		<option value="summ" <?= $_GET['operation'] === "summ" ? 'selected' : '' ?> >+</option>
-		<option value="substr" <?= $_GET['operation'] === "substr" ? 'selected' : '' ?> >-</option>
-		<option value="mul" <?= $_GET['operation'] === "mul" ? 'selected' : '' ?> >*</option>
-		<option value="div" <?= $_GET['operation'] === "div" ? 'selected' : '' ?> >/</option>
+	<select name="operation" value="<?= $operation ?>">
+		<option value="summ" <?= $operation === "summ" ? 'selected' : '' ?> >+</option>
+		<option value="substr" <?= $operation === "substr" ? 'selected' : '' ?> >-</option>
+		<option value="mul" <?= $operation === "mul" ? 'selected' : '' ?> >*</option>
+		<option value="div" <?= $operation === "div" ? 'selected' : '' ?> >/</option>
 	</select>
 	<input type="text" name="arg2" value="<?= $arg2 ?>">
 	<input type="submit" value="=">
