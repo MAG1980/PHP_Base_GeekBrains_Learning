@@ -3,7 +3,7 @@
 function getGallery($path)
 {
 //    return array_splice(scandir($path), 2);
-    return getAssocResult('SELECT * FROM images');
+    return getAssocResult('SELECT * FROM images ORDER BY likes DESC');
 
 }
 
@@ -11,8 +11,13 @@ function getImage($id)
 {
 //    return array_splice(scandir($path), 2);
 
-    return getAssocResult("SELECT filename FROM images WHERE id = $id");
+    return getOneResult("SELECT filename FROM images WHERE id = $id");
 
+}
+
+function addLike($id)
+{
+    executeSql("UPDATE images SET likes=likes + 1 WHERE id=$id");
 }
 
 function loadImage()
