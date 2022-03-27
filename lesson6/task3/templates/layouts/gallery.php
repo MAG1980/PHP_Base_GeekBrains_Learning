@@ -26,14 +26,7 @@
 	<div class="post_title"><h2>Моя галерея</h2></div>
 	<div class="gallery">
 		<?= $content ?>
-
 	</div>
-	Загрузить изображение:
-	<form method="post" enctype="multipart/form-data">
-		<input type="file" name="image">
-		<input type="submit" value="Загрузить" name="load">
-	</form>
-
 </div>
 
 </body>

@@ -37,7 +37,7 @@ function prepareVariables($page, $action)
             $id = (int)$_GET['id'];
             addLike($id);
             $params ['layout'] = 'gallery';
-            $params['image'] = getImage($id);
+            $params['image'] = getOneImage($id);
             break;
 
         case 'catalog':

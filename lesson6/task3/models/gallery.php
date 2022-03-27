@@ -7,11 +7,11 @@ function getGallery($path)
 
 }
 
-function getImage($id)
+function getOneImage($id)
 {
 //    return array_splice(scandir($path), 2);
 
-    return getOneResult("SELECT filename FROM images WHERE id = $id");
+    return getOneResult("SELECT filename, likes FROM images WHERE id = {$id}");
 
 }
 
