@@ -33,6 +33,13 @@ function prepareVariables($page, $action)
             // $params['message'] = $messages[$_GET['status']];
             break;
 
+        case 'image':
+            $id = (int)$_GET['id'];
+            var_dump($id);
+            $params ['layout'] = 'gallery';
+            $params['image'] = getImage($id);
+            break;
+
         case 'catalog':
             $params['catalog'] = [
                 [

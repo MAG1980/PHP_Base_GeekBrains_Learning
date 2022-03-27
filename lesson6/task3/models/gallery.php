@@ -3,7 +3,15 @@
 function getGallery($path)
 {
 //    return array_splice(scandir($path), 2);
-    return getAssocResult('SELECT filename FROM images');
+    return getAssocResult('SELECT * FROM images');
+
+}
+
+function getImage($id)
+{
+//    return array_splice(scandir($path), 2);
+
+    return getAssocResult("SELECT filename FROM images WHERE id = $id");
 
 }
 
