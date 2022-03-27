@@ -19,4 +19,5 @@ include ROOT . "/models/log.php";
 include ROOT . "/models/feedback.php";
 include ROOT . "/models/gallery.php";
 include ROOT . "/models/news.php";
+include ROOT . "/models/catalog.php";
 include ROOT . "/models/classSimpleImage.php";

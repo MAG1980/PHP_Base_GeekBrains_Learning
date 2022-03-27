@@ -1,6 +1,7 @@
 <?php
 
-function getDb() {
+function getDb()
+{
     static $db = null;
     if (is_null($db)) {
         $db = @mysqli_connect(HOST, USER, PASS, DB) or die("Could not connect: " . mysqli_connect_error());
@@ -8,7 +9,8 @@ function getDb() {
     return $db;
 }
 
-function getAssocResult($sql) {
+function getAssocResult(string $sql)
+{
 
     $result = @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
 
@@ -20,12 +22,20 @@ function getAssocResult($sql) {
     return $array_result;
 }
 
-function getOneResult($sql) {
+function getOneResult($sql)
+{
     $result = @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
     return mysqli_fetch_assoc($result);
 }
 
-function executeSql($sql) {
+function executeSql($sql)
+{
     @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
     return mysqli_affected_rows(getDb());
+}
+
+function secureRequest($request)
+{
+    mysqli_real_escape_string(getDb(),
+        (string)htmlspecialchars(strip_tags(request)));
 }

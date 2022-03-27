@@ -41,20 +41,12 @@ function prepareVariables($page, $action)
             break;
 
         case 'catalog':
-            $params['catalog'] = [
-                [
-                    'name' => 'Пицца',
-                    'price' => 24
-                ],
-                [
-                    'name' => 'Чай',
-                    'price' => 1
-                ],
-                [
-                    'name' => 'Яблоко',
-                    'price' => 12
-                ],
-            ];
+            $params['catalog'] = getCatalog();
+            break;
+
+        case 'catalog_item':
+            $id = (int)$_GET['id'];
+            $params['catalog_item'] = getGatalogItem($id);
             break;
 
         case 'apicatalog':

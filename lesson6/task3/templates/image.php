@@ -1,6 +1,6 @@
-<?= var_dump($image) ?>
 <div class="gallery__img">
+	<p>Просмотров: <?= $image['likes'] ?></p>
 	<img src="/gallery_img/big/<?= $image['filename'] ?>"/>
-	<span class="likes__count"><?= $image['likes'] ?></span>
+
 </div>
 <?= $message ?>
