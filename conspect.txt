@@ -1298,3 +1298,47 @@ $id = (int)$_GET[ 'id' ]; - явное приведение типа к числ
 $data = json_decode(file_get_contents('php://input'));
 т.к. file_get_contents() позволяет получить тело запроса,
 а json_decode() преобразовать данные в ассоциативный массив.
+
+! 1:59 feedback
+
+Для настройки ЧПУ в nginx требуется:
+в конфигурационном файле nginx OpenServer в глобальных и локальных настройках в блоке local разделе
+server{
+    ...
+    location/{
+//добавить строку
+    try_files $uri $uri/ / index.php?args;
+//которая будет перенаправлять запросы для всех файлов,
+//которые не найдены на сервере на index.php?args;
+    }
+}
+
+
+
+
+Лекция №7
+
+!login = 'admin'
+pass = 123
+
+$_COOCKIE
+
+!password_hash()
+!password_verify()
+
+!session_start()
+$_SESSION
+
+!unset($_SESSION['login'])
+
+!session_destroy($_SESSION['login']) - позволяет прочитать значение, в отличие от unset()
+
+!session_id()
+
+!regenerate_id()
+
+Файл сессии хранится на сервере.
+
+Сессия позволяет однозначно идентифицировать пользователя до закрытия браузера, даже без авторизации.
+
+function getDb() в 20:36
