@@ -1,24 +1,31 @@
 <?php
-function getAllFeedback() {
+function getAllFeedback()
+{
     $sql = "SELECT * FROM feedback ORDER BY id DESC";
     return getAssocResult($sql);
 }
 
-function addFeedBack() {
+function addFeedBack()
+{
+    $name = secureRequestPrepare($_POST['name']);
+    $feedback = secureRequestPrepare($_POST['text']);
+    $_Post = [];
     var_dump($_POST);
-    die();
-
+    executeSql("INSERT INTO feedback (name, text) VALUES ('{$name}', '{$feedback}')");
+//    die();
 }
 
-function deleteFeedBack() {
+function deleteFeedBack()
+{
     var_dump($_POST);
     die();
 }
 
-function doFeedbackAction($action) {
+function doFeedbackAction($action)
+{
     if ($action == "add") {
         addFeedBack();
-        die();
+
     }
     if ($action == "save") {
         var_dump($_POST);

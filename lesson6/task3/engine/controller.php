@@ -70,8 +70,9 @@ function prepareVariables($page, $action)
             exit;
 
         case 'feedback':
+
             doFeedbackAction($action);
-            $params['feedback'] = getAllFeedback();
+            $params['feedbacks'] = getAllFeedback();
             break;
 
         default:
