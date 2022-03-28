@@ -22,7 +22,12 @@ function addFeedBack()
 
 function deleteFeedBack()
 {
-    var_dump($_POST);
+    $id = secureRequestPrepare((int)$_GET['id']);
+    $sql = "DELETE FROM feedback WHERE id = {$id}";
+    var_dump($sql);
+    executeSql($sql);
+    var_dump($id);
+    header('Location:/feedback/?status=delete');
     die();
 }
 
@@ -32,11 +37,16 @@ function doFeedbackAction($action)
         addFeedBack();
 
     }
-    if ($action == "save") {
-        var_dump($_POST);
+    if ($action == "delete") {
+        var_dump($_GET);
+        deleteFeedBack();
         die();
     }
     if ($action == "edit") {
+        var_dump($_POST);
+        die();
+    }
+    if ($action == "save") {
         var_dump($_POST);
         die();
     }

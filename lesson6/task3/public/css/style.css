@@ -75,3 +75,6 @@ a:hover img {
 	color: #fff;
 }
 
+.feedback__item {
+	display: flex;
+}
