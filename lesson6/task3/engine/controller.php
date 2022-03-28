@@ -73,6 +73,7 @@ function prepareVariables($page, $action)
 
             doFeedbackAction($action);
             $params['feedbacks'] = getAllFeedback();
+            $params['message'] = getFeedbackMessage();
             break;
 
         default:

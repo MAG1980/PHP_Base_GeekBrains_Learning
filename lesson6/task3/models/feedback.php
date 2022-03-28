@@ -11,8 +11,13 @@ function addFeedBack()
     $feedback = secureRequestPrepare($_POST['text']);
     $_Post = [];
     var_dump($_POST);
-    executeSql("INSERT INTO feedback (name, text) VALUES ('{$name}', '{$feedback}')");
-//    die();
+
+    if ($name === '' || $feedback === '') {
+        header('Location:/feedback/?status=error');
+    } else {
+        executeSql("INSERT INTO feedback (name, text) VALUES ('{$name}', '{$feedback}')");
+        header('Location:/feedback/?status=ok');
+    }
 }
 
 function deleteFeedBack()
@@ -35,4 +40,15 @@ function doFeedbackAction($action)
         var_dump($_POST);
         die();
     }
+}
+
+function getFeedbackMessage()
+{
+    $messages = [
+        'ok' => 'Сообщение добавлено',
+        'delete' => 'Сообщение удалено',
+        'edit' => 'Сообщение изменено',
+        'error' => 'Возникла ошибка!'
+    ];
+    return (isset($_GET['status'])) ? $messages [$_GET['status']] : '';
 }
