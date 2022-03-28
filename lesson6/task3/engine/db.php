@@ -28,14 +28,14 @@ function getOneResult($sql)
     return mysqli_fetch_assoc($result);
 }
 
-function executeSql($sql)
+function executeSql(string $sql)
 {
     @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
     return mysqli_affected_rows(getDb());
 }
 
-function secureRequest($request)
+function secureRequestPrepare($request)
 {
-    mysqli_real_escape_string(getDb(),
-        (string)htmlspecialchars(strip_tags(request)));
+    return mysqli_real_escape_string(getDb(),
+        (string)htmlspecialchars(strip_tags($request)));
 }

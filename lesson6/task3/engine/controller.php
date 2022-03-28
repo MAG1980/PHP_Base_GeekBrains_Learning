@@ -30,7 +30,7 @@ function prepareVariables($page, $action)
 
             $params ['layout'] = 'gallery';
             $params['gallery'] = getGallery(IMG_BIG);
-            $params['message'] = $messages[$_GET['status']];
+            $params['upload_message'] = getFormMessage($_GET['status']);
             break;
 
         case 'image':

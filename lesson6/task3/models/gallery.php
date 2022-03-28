@@ -51,22 +51,29 @@ function loadImage()
     }
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $path_big)) {
-
+        $filename = secureRequestPrepare($_FILES["image"]["name"]);
+        executeSql("INSERT INTO images (filename) VALUES ('$filename')");
 
         //Ресайзим
         $image = new SimpleImage();
         $image -> load($path_big);
         $image -> resizeToWidth(150);
         $image -> save($path_small);
-        header("Location: /?page=gallery&status=OK");
+        header("Location: /gallery/?status=ok");
     } else {
         echo "Ошибка<br>";
+        header("Location: /gallery/?status=error");
     }
 }
 
-$messages = [
-    'ok' => 'Сообщение добавлено',
-    'delete' => 'Сообщение удалено',
-    'edit' => 'Сообщение изменено',
-    'error' => 'Ошибка'
-];
+function getFormMessage($status)
+{
+    $uploading =
+        [
+            'ok' => "Загрузка прошла успешно!",
+            'error' => 'Ошибка загрузки!',
+            'error1' => 'Загрузка php-файлов запрещена!'
+        ];
+
+    return $uploading[$status];
+}

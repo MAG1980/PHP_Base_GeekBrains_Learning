@@ -5,8 +5,9 @@
 			<span class="likes__count"><?= $image['likes'] ?></span>
 		</a>
 	<? endforeach; ?>
-	<?= $message ?>
+
 	<div>
+		<p> <?= $upload_message ?></p>
 		<p>Загрузить изображение:</p>
 		<form method="post" enctype="multipart/form-data">
 			<input type="file" name="image">
