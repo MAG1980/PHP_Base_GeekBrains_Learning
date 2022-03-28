@@ -1,3 +1,4 @@
+<? //= ($_SERVER['REQUEST_URI'] != '/') ? '<p><a href=" / ">Главная</a></p>' : '' ?>
 <a href="/">Главная</a>
 <a href="/catalog">Каталог</a>
 <a href="/about">О нас</a>

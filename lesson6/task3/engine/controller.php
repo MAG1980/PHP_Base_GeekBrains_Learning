@@ -30,7 +30,7 @@ function prepareVariables($page, $action)
 
             $params ['layout'] = 'gallery';
             $params['gallery'] = getGallery(IMG_BIG);
-            // $params['message'] = $messages[$_GET['status']];
+            $params['message'] = $messages[$_GET['status']];
             break;
 
         case 'image':
@@ -47,6 +47,8 @@ function prepareVariables($page, $action)
         case 'catalog_item':
             $id = (int)$_GET['id'];
             $params['catalog_item'] = getGatalogItem($id);
+            $params['catalog_message'] = null ?? getCatalogMessage('error');
+            var_dump(getGatalogItem($id));
             break;
 
         case 'apicatalog':
