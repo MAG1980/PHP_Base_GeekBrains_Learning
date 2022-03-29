@@ -10,7 +10,6 @@ function addFeedBack()
     $name = secureRequestPrepare($_POST['name']);
     $feedback = secureRequestPrepare($_POST['text']);
     $_Post = [];
-    var_dump($_POST);
 
     if ($name === '' || $feedback === '') {
         header('Location:/feedback/?status=error');
@@ -31,6 +30,29 @@ function deleteFeedBack()
     die();
 }
 
+function getEditableFeedback($action)
+{
+    if ($action == "edit") {
+        $id = secureRequestPrepare((int)$_GET['id']);
+        $sql = "SELECT * FROM feedback WHERE id = {$id}";
+        return $editable_feedback = getOneResult($sql);
+    } else {
+        return null;
+    }
+
+}
+
+function saveEditableFeedback()
+{
+    $name = secureRequestPrepare($_POST['name']);
+    $text = secureRequestPrepare($_POST['text']);
+    $id = secureRequestPrepare((int)$_GET['id']);
+    $sql = "UPDATE feedback SET name = '{$name}', text = '{$text}' WHERE id = {$id}";
+    var_dump($sql);
+    executeSql($sql);
+    header('Location: /feedback/?status=edit');
+}
+
 function doFeedbackAction($action)
 {
     if ($action == "add") {
@@ -38,16 +60,11 @@ function doFeedbackAction($action)
 
     }
     if ($action == "delete") {
-        var_dump($_GET);
         deleteFeedBack();
-        die();
     }
-    if ($action == "edit") {
-        var_dump($_POST);
-        die();
-    }
+
     if ($action == "save") {
-        var_dump($_POST);
+        saveEditableFeedback();
         die();
     }
 }

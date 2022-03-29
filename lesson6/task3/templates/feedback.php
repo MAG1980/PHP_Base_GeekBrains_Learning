@@ -4,11 +4,14 @@
 	<p>Статус действия: <?= $message ?></p>
 <? endif; ?>
 
-<form action="/feedback/add/" method="post">
+
+<form action="/feedback/<?= $action ?>" method="post">
 	Оставьте отзыв: <br>
-	<input type="text" name="name" placeholder="Ваше имя"><br>
-	<input type="textarea" name="text" placeholder="Ваш отзыв"><br>
-	<input type="submit" value="Добавить">
+	<input type="text" name="name" placeholder="Ваше имя" value="<?= $editable_feedback['name'] ?>"><br>
+	<input type="textarea" name="text" placeholder="Ваш отзыв" value="<?= $editable_feedback['text'] ?>"><br>
+
+	<input type="submit" value="<?= $name_submit ?>">
+
 </form>
 
 <?php foreach ($feedbacks as $item): ?>
