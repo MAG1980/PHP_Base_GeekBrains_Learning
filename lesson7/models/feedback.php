@@ -48,7 +48,6 @@ function saveEditableFeedback()
     $text = secureRequestPrepare($_POST['text']);
     $id = secureRequestPrepare((int)$_GET['id']);
     $sql = "UPDATE feedback SET name = '{$name}', text = '{$text}' WHERE id = {$id}";
-    var_dump($sql);
     executeSql($sql);
     header('Location: /feedback/?status=edit');
 }

@@ -10,7 +10,7 @@
 				<p>Стоимость: <?= $item["price"] ?></p>
 			</a>
 
-			<form action="/cart/" method="post">
+			<form action="/catalog_item/add_to_cart/" method="post">
 				<input type="text" name="id" value="<?= $item['id'] ?>" hidden>
 				<button type="submit">Купить</button>
 			</form>

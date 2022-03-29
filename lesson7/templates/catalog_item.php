@@ -7,7 +7,7 @@
 		<p>Стоимость: <?= $catalog_item["price"] ?></p>
 	</div>
 
-	<form action="/cart/" method="post">
+	<form action="/catalog_item/add_to_cart/" method="post">
 		<input type="text" name="id" value="<?= $catalog_item['id'] ?>" hidden>
 		<button type="submit">Купить</button>
 	</form>

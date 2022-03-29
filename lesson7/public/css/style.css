@@ -13,6 +13,16 @@ body {
 	margin: 0 auto;
 }
 
+.menu {
+	display: flex;
+	list-style-type: none;
+}
+
+.menu__link {
+	text-decoration: none;
+	padding: 10px 15px;
+}
+
 .gallery img {
 	margin: 5px;
 	border: 3px solid #fff;
@@ -77,4 +87,25 @@ a:hover img {
 
 .feedback__item {
 	display: flex;
+}
+
+.cart__header {
+	background-color: #f2f2f2;
+	color: #4A4A4A;
+	align-items: center;
+}
+
+.cart__row {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.cart__column {
+	width: 15%;
+	text-align: center;
+}
+
+.cart__full-price {
+	width: 60%;
+	text-align: right;
 }

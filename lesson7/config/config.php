@@ -20,5 +20,6 @@ include ROOT . "/models/feedback.php";
 include ROOT . "/models/gallery.php";
 include ROOT . "/models/news.php";
 include ROOT . "/models/catalog.php";
+include ROOT . "/models/catalog_item.php";
 include ROOT . "/models/cart.php";
 include ROOT . "/models/classSimpleImage.php";

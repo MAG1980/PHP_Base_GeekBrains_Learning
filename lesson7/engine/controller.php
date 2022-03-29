@@ -6,6 +6,7 @@ function prepareVariables($page, $action)
 //Для каждой страницы готовим массив со своим набором переменных
 //для подстановки их в соотвествующий шаблон
     $params ['layout'] = 'layout';
+    $session_id = session_id();
 
     switch ($page){
         case 'index':
@@ -45,6 +46,7 @@ function prepareVariables($page, $action)
             break;
 
         case 'catalog_item':
+            doCatalogItemAction($action, $session_id);
             $id = (int)$_GET['id'];
             $catalog_item = getGatalogItem($id);
             $params['catalog_item'] = $catalog_item;
@@ -55,10 +57,8 @@ function prepareVariables($page, $action)
             break;
 
         case 'cart':
-            $session_id = session_id();
-            var_dump($_POST);
-            var_dump($session_id);
-            addToCart($session_id);
+            $goods_id = $_POST['goods_id'];
+            $params['cart'] = doCartAction($action, $session_id, $goods_id);
             break;
 
         case 'apicatalog':
@@ -81,13 +81,13 @@ function prepareVariables($page, $action)
 
         case 'feedback':
             doFeedbackAction($action);
+            $editableFeedback = getEditableFeedback($action);
             $params['feedbacks'] = getAllFeedback();
             $params['message'] = getFeedbackMessage();
-            $params['editable_feedback'] = getEditableFeedback($action);
-            $params['name_submit'] = getEditableFeedback($action) ? 'Сохранить' : 'Добавить';
+            $params['editable_feedback'] = $editableFeedback;
+            $params['name_submit'] = $editableFeedback ? 'Сохранить' : 'Добавить';
             $id = (int)$_GET['id'];
-            $params['action'] = getEditableFeedback($action) ? "save/?id={$id}" : 'add/';
-
+            $params['action'] = $editableFeedback ? "save/?id={$id}" : 'add/';
             break;
 
         default:
