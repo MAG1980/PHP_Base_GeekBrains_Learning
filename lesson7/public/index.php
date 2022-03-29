@@ -6,6 +6,8 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
 
+session_start();
+
 //Читаем параметр page из url, чтобы определить, какую страницу-шаблон
 //хочет увидеть пользователь, по умолчанию это будет index
 

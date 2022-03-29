@@ -1,15 +1,5 @@
 <?php
-function getCatalog()
-{
-    return getAssocResult("SELECT * FROM goods");
-}
-
-function getGatalogItem($id)
-{
-    return getOneResult("SELECT * FROM goods WHERE id={$id}");
-}
-
-function getCatalogMessage($status)
+function getCatalogItemMessage($status)
 {
     $messages = [
         'ok' => 'Товар добавлен в корзину!',

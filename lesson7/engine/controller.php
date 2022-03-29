@@ -46,15 +46,21 @@ function prepareVariables($page, $action)
 
         case 'catalog_item':
             $id = (int)$_GET['id'];
-            $params['catalog_item'] = getGatalogItem($id);
-            $params['catalog_message'] = null ?? getCatalogMessage('error');
+            $catalog_item = getGatalogItem($id);
+            $params['catalog_item'] = $catalog_item;
+            $_GET['status'] = !$catalog_item ? 'error' : $_GET['status'];
+            $status = $_GET['status'];
+            $params['catalog_message'] = getCatalogMessage($status);
+
             break;
 
         case 'cart':
+            $session_id = session_id();
             var_dump($_POST);
-            die();
+            var_dump($session_id);
+            addToCart($session_id);
             break;
-            
+
         case 'apicatalog':
             $params['catalog'] = [
                 [
