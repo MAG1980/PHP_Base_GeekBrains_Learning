@@ -50,6 +50,11 @@ function prepareVariables($page, $action)
             $params['catalog_message'] = null ?? getCatalogMessage('error');
             break;
 
+        case 'cart':
+            var_dump($_POST);
+            die();
+            break;
+            
         case 'apicatalog':
             $params['catalog'] = [
                 [
@@ -76,6 +81,7 @@ function prepareVariables($page, $action)
             $params['name_submit'] = getEditableFeedback($action) ? 'Сохранить' : 'Добавить';
             $id = (int)$_GET['id'];
             $params['action'] = getEditableFeedback($action) ? "save/?id={$id}" : 'add/';
+
             break;
 
         default:
