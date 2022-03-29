@@ -10,7 +10,10 @@
 				<p>Стоимость: <?= $item["price"] ?></p>
 			</a>
 
-			<button>Купить</button>
+			<form action="/cart/" method="post">
+				<input type="text" name="id" value="<?= $item['id'] ?>" hidden>
+				<button type="submit">Купить</button>
+			</form>
 			<hr>
 		</div>
 	<?php endforeach; ?>
