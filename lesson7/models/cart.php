@@ -1,6 +1,6 @@
 <?php
 
-function doCartAction($action, $session_id, $goods_id)
+function doCartAction($action, $session_id, $goods_id, $customer_name = '', $phone_number = '')
 {
 
     if ($action == "get") {
@@ -9,7 +9,13 @@ function doCartAction($action, $session_id, $goods_id)
 
     if ($action == "delete") {
         deleteCartRow($session_id, $goods_id);
-        header("Location: /cart/get");
+        header("Location: /cart/get/?message=delete-ok");
+        die();
+    }
+
+    if ($action == "checkout") {
+        cartCheckout($session_id, $customer_name, $phone_number);
+        header("Location: /cart/get/?message=order-ok");
         die();
     }
     return $result;
@@ -32,11 +38,17 @@ function deleteCartRow($session_id, $goods_id)
     executeSql($sql);
 }
 
+function cartCheckout($session_id, $customer_name, $phone_number)
+{
+    $sql = "INSERT INTO orders (cart_session, customer_name, phone_number) VALUES ('{$session_id}', '{$customer_name}', '{$phone_number}') ";
+    executeSql($sql);
+}
+
 function getCartMessage($status)
 {
     $messages = [
-        'ok' => 'Товар добавлен в корзину',
-        'error' => 'Такого товара в каталоге не существует!'
+        'order-ok' => 'Заказ успешно оформлен!',
+        'delete-ok' => 'Товар удалён из заказа!'
     ];
     return $messages[$status];
 }

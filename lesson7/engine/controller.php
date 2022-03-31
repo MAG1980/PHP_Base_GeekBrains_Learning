@@ -58,7 +58,10 @@ function prepareVariables($page, $action)
 
         case 'cart':
             $goods_id = $_POST['goods_id'];
-            $params['cart'] = doCartAction($action, $session_id, $goods_id);
+            $customer_name = $_POST['customer_name'];
+            $phone_number = $_POST['phone_number'];
+            $params['cart'] = doCartAction($action, $session_id, $goods_id, $customer_name, $phone_number);
+            $params['message'] = getCartMessage($_GET['message']);
             break;
 
         case 'apicatalog':
