@@ -1,6 +1,6 @@
 <h2>Каталог товаров:</h2>
 
-<? if (count($catalog) != 0): ?>
+<?php if (count($catalog) != 0): ?>
 	<?php foreach ($catalog as $item): ?>
 		<div>
 			<h2><?= $item["name"] ?></h2>

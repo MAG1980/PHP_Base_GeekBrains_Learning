@@ -1,6 +1,6 @@
 <h2>Отзывы</h2>
 
-<? if ($message): ?>
+<?php if ($message): ?>
 	<p>Статус действия: <?= $message ?></p>
 <? endif; ?>
 

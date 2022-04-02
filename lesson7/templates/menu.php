@@ -1,4 +1,18 @@
 <? //= ($_SERVER['REQUEST_URI'] != '/') ? '<p><a href=" / ">Главная</a></p>' : '' ?>
+<?= var_dump($_SESSION); ?>
+<?= var_dump($is_auth); ?>
+<?= var_dump($_SESSION); ?>
+<?php if (!$is_auth): ?>
+	<form action="" method="post">
+		<input class="menu__input" type="text" name="login" placeholder="Login">
+		<input class="menu__input" type="password" name="password" placeholder="Password">
+		Save? <input type="checkbox" name="save">
+		<button class="menu__button" type="submit" name="send">Sign In</button>
+	</form>
+<?php else: ?>
+	Добро пожаловать, <?= $user ?>!  <a href="/?logout">Exit</a></br>
+<?php endif; ?>
+
 <ul class="menu">
 	<li class="menu_item"><a class="menu__link" href="/">Главная</a></li>
 	<li class="menu_item"><a class="menu__link" href="/catalog">Каталог</a></li>

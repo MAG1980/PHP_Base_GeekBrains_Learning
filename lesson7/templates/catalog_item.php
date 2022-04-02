@@ -1,5 +1,5 @@
 <p><?= $catalog_message ?></p>
-<? if ($_GET['status'] != 'error'): ?>
+<?php if ($_GET['status'] != 'error'): ?>
 	<h2 class="catalog__item-title"><?= $catalog_item["name"] ?></h2>
 	<div class="catalog__link">
 		<img class="catalog__item-img" src="/catalog_img/<?= $catalog_item['image'] ?>" alt="<?= $catalog_item['name'] ?>">

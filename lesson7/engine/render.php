@@ -9,7 +9,7 @@ function render($page, $params)
 {
     return renderTemplate(LAYOUTS_DIR . $params ['layout'], [
         'content' => renderTemplate($page, $params),
-        'menu' => renderTemplate('menu')
+        'menu' => renderTemplate('menu', $params)
     ]);
 }
 

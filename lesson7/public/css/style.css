@@ -141,3 +141,7 @@ a:hover img {
 .dn {
 	display: none;
 }
+
+.menu__button, .menu__input {
+	padding: 10px 15px;
+}

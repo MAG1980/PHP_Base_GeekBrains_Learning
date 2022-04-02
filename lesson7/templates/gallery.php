@@ -1,4 +1,4 @@
-<? if (count($gallery) != 0): ?>
+<?php if (count($gallery) != 0): ?>
 	<?php foreach ($gallery as $image): ?>
 		<a rel="gallery" class="photo gallery__img" href="/image/?id=<?= $image['id'] ?>">
 			<img class="gallery__small-img" src="/gallery_img/small/<?= $image['filename'] ?>" width="150"/>

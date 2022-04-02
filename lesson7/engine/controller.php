@@ -6,11 +6,19 @@ function prepareVariables($page, $action)
 //Для каждой страницы готовим массив со своим набором переменных
 //для подстановки их в соотвествующий шаблон
     $params ['layout'] = 'layout';
-    $session_id = session_id();
+
+    if (isAuth()) {
+        $params['is_auth'] = true;
+        $params['user'] = getUserLogin();
+        var_dump($_SESSION);
+    } else {
+        $params['is_auth'] = false;
+        $params['user'] = 'Гость';
+
+    }
 
     switch ($page){
         case 'index':
-            $params['name'] = 'Вася';
             break;
 
         case 'news':
