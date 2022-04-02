@@ -21,9 +21,17 @@ function prepareVariables($page, $action)
         case 'index':
             break;
 
+        case 'registration':
+            $login = $_POST['login'];
+            $password1 = $_POST['password1'];
+            $password2 = $_POST['password2'];
+            $status = $_GET['status'];
+            doRegistrationAction($action, $login, $password1, $password2);
+            $params['message'] = getRegistrationMessage($status);
+            break;
+
         case 'news':
             $params['news'] = getNews();
-
             break;
 
         case 'onenews':

@@ -17,6 +17,8 @@ if (isset($_POST['send'])) {
             executeSql($sql);//обновляем hash в БД для соответствующего id
             setcookie('hash', $hash, time() + 3600, '/');
         }
+        var_dump($_SESSION);
+//        die();
         header('Location:' . $_SERVER['HTTP_REFERER']);
     }
 }
@@ -44,12 +46,11 @@ function auth($login, $password): bool
     //получение id и hash пароля в БД, соответствующий $login
     $passDb = getOneResult($sql);
     var_dump($passDb);
-  
+
     if (password_verify($password, $passDb['password'])) {
         $_SESSION['login'] = $login;// что приводит к isAuth() = true
         $_SESSION['id'] = $passDb['id'];//id пользователя из БД пишем в сессию
         var_dump($_SESSION);
-        die();
         return true;
     }
     return false;
