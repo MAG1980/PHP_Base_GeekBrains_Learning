@@ -25,3 +25,4 @@ include ROOT . "/models/cart.php";
 include ROOT . "/models/classSimpleImage.php";
 include ROOT . "/models/auth.php";
 include ROOT . "/models/registration.php";
+include ROOT . "/models/orders.php";

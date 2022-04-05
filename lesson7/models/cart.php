@@ -15,6 +15,7 @@ function doCartAction($action, $session_id, $goods_id, $customer_name = '', $pho
 
     if ($action == "checkout") {
         cartCheckout($session_id, $customer_name, $phone_number);
+        session_regenerate_id();
         header("Location: /cart/get/?message=order-ok");
         die();
     }

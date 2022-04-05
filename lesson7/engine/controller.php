@@ -18,6 +18,9 @@ function prepareVariables($page, $action)
     switch ($page){
         case 'index':
             break;
+        case  'orders':
+            $params['orders'] = getOrders();
+            break;
 
         case 'registration':
             $login = $_POST['login'];
@@ -60,7 +63,7 @@ function prepareVariables($page, $action)
             break;
 
         case 'catalog_item':
-            doCatalogItemAction($action, $session_id);
+            doCatalogItemAction($action, session_id());
             $id = (int)$_GET['id'];
             $catalog_item = getGatalogItem($id);
             $params['catalog_item'] = $catalog_item;
@@ -74,7 +77,7 @@ function prepareVariables($page, $action)
             $goods_id = $_POST['goods_id'];
             $customer_name = $_POST['customer_name'];
             $phone_number = $_POST['phone_number'];
-            $params['cart'] = doCartAction($action, $session_id, $goods_id, $customer_name, $phone_number);
+            $params['cart'] = doCartAction($action, session_id(), $goods_id, $customer_name, $phone_number);
             $params['message'] = getCartMessage($_GET['message']);
             break;
 
