@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Мар 31 2022 г., 16:01
+-- Время создания: Апр 05 2022 г., 16:09
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.4.27
 
@@ -39,10 +39,27 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `session_id`, `goods_id`, `number`) VALUES
-(27, '7p382id4ml595fgnoduhqjehsq3bgp4b', 6, 1),
-(51, 'nvqtr2rscugj07qnedcohtefn17p78bp', 1, 1),
-(52, 'nvqtr2rscugj07qnedcohtefn17p78bp', 1, 1),
-(57, 'oc6l0n0236pq0a0vheogk547lr1cb1r7', 1, 1);
+(122, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 1, 1),
+(123, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 1, 1),
+(124, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 2, 1),
+(125, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 6, 1),
+(126, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 6, 1),
+(127, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 6, 1),
+(128, '7fkh5s44hfnlf886thevu4i5brat9e92', 1, 1),
+(129, '7fkh5s44hfnlf886thevu4i5brat9e92', 2, 1),
+(130, '7fkh5s44hfnlf886thevu4i5brat9e92', 6, 1),
+(131, '7fkh5s44hfnlf886thevu4i5brat9e92', 2, 1),
+(132, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 1, 1),
+(133, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 1, 1),
+(134, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 2, 1),
+(135, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 2, 1),
+(136, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 2, 1),
+(137, 'u7l02rgmcr348rk9nq1il3ccamam1tj4', 6, 1),
+(138, 'u7l02rgmcr348rk9nq1il3ccamam1tj4', 6, 1),
+(139, 'u7l02rgmcr348rk9nq1il3ccamam1tj4', 6, 1),
+(140, 'g2bl3gjjnq9as1g36s7pan5a6gmms04j', 1, 1),
+(141, 'g2bl3gjjnq9as1g36s7pan5a6gmms04j', 1, 1),
+(142, 'g2bl3gjjnq9as1g36s7pan5a6gmms04j', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -108,13 +125,13 @@ CREATE TABLE `images` (
 
 INSERT INTO `images` (`id`, `filename`, `likes`) VALUES
 (10, '01.jpg', 4),
-(11, '02.jpg', 12),
+(11, '02.jpg', 13),
 (12, '03.jpg', 0),
 (13, '04.jpg', 1),
 (14, '05.jpg', 1),
 (15, '06.jpg', 21),
 (16, '07.jpg', 1),
-(17, '08.jpg', 6),
+(17, '08.jpg', 7),
 (18, '09.jpg', 1),
 (19, '10.jpg', 0),
 (20, '11.jpg', 2),
@@ -163,11 +180,33 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `cart_session`, `customer_name`, `phone_number`) VALUES
-(1, 'oc6l0n0236pq0a0vheogk547lr1cb1r7', 'name', '12-123-23'),
-(2, 'nvqtr2rscugj07qnedcohtefn17p78bp', 'Alex', '55-555-55'),
-(3, 'oc6l0n0236pq0a0vheogk547lr1cb1r7', 'qasdf', '123123'),
-(4, 'oc6l0n0236pq0a0vheogk547lr1cb1r7', 'erweq', 'sadfsdf'),
-(5, 'nvqtr2rscugj07qnedcohtefn17p78bp', 'Ivan', '11-22-33');
+(14, 'knoe4o69jvhqqgfsc39aaeokklrm33fh', 'test Алексей', '12-123-23'),
+(15, '7fkh5s44hfnlf886thevu4i5brat9e92', 'user Никита', '55-55-55'),
+(16, '5u3e0epo7ud6m7lueheh5bojsbaa8sti', 'test', '11-11-11'),
+(17, 'u7l02rgmcr348rk9nq1il3ccamam1tj4', 'test', '22-22-33'),
+(18, 'g2bl3gjjnq9as1g36s7pan5a6gmms04j', 'admin', '45445455');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `password`, `hash`) VALUES
+(17, 'test', '$2y$10$ob20o7HXjiND6TdeK25AQ.XOjeN1owsySymdXRbEf8Ix6uBW2BHYe', '1356634696624bd4100a5e34.00279342'),
+(18, 'admin', '$2y$10$kQ1uE/RuyHOL78PqpK9biuy13xbk9WndPyCbFEd9VL9me.ec1V4S.', '1758567421624bf366e43460.78362641'),
+(19, 'user', '$2y$10$CQoRfURtXEnXsFXNms6hwOFIM14Ge.Tl3HpDVJbOz44a3h768t5.m', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -211,7 +250,14 @@ ALTER TABLE `news`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cart_session` (`cart_session`);
+  ADD KEY `cart_session` (`cart_session`),
+  ADD KEY `cart_session_2` (`cart_session`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -221,13 +267,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT для таблицы `goods`
@@ -251,7 +297,13 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
