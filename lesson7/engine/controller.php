@@ -19,7 +19,9 @@ function prepareVariables($page, $action)
         case 'index':
             break;
         case  'orders':
+            $id = $_GET['order_id'];
             $params['orders'] = getOrders();
+            $params['current_order'] = doOrdersAction($action, $id);
             break;
 
         case 'registration':

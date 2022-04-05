@@ -9,7 +9,7 @@ function getDb()
     return $db;
 }
 
-function getAssocResult(string $sql)
+function getAssocResult(string $sql): array
 {
 
     $result = @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
