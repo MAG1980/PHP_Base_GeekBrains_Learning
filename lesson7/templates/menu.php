@@ -1,7 +1,4 @@
 <? //= ($_SERVER['REQUEST_URI'] != '/') ? '<p><a href=" / ">Главная</a></p>' : '' ?>
-<?= var_dump($_SESSION); ?>
-<?= var_dump($is_auth); ?>
-<?= var_dump($_SESSION); ?>
 <?php if (!$is_auth): ?>
 	<form action="" method="post">
 		<input class="menu__input" type="text" name="login" placeholder="Login">
@@ -29,4 +26,8 @@
 	</li>
 	<li class="menu_item"><a class="menu__link" href="/cart/get">Корзина</a><br>
 	</li>
+	<?php if ($user === 'admin'): ?>
+		<li class="menu_item"><a class="menu__link" href="/orders">Заказы</a><br>
+		</li>
+	<?php endif; ?>
 </ul>

@@ -11,9 +11,10 @@ function addItemToCart($session_id)
 {
     $id = secureRequestPrepare($_POST['id']);
     $sql = "INSERT INTO cart (session_id, goods_id) VALUES ('{$session_id}', '{$id}')";
-    var_dump($sql);
     executeSql($sql);
-    header("Location:/catalog_item/?id={$id}&status=ok");
+    $status = !empty($_GET) ? "" : "/?id={$id}&status=ok";
+    header('Location:' . $_SERVER['HTTP_REFERER'] . $status);
+    die();
 }
 
 function getCatalogItemMessage($status)

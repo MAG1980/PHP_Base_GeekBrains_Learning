@@ -32,7 +32,8 @@
 		<div class="cart__checkout-space">
 			<form class="cart__checkout-form dn" action="/cart/checkout/" method="post">
 				<input type="text" name="checkout" value="<?= $cartLine['session_id'] ?>" hidden>
-				<input class="cart__checkout-input" type="text" name="customer_name" placeholder="Имя">
+				<input class="cart__checkout-input" type="text" name="customer_name" placeholder="Имя"
+				       value="<?= $_SESSION['login'] ?>">
 				<input class="cart__checkout-input" type="tel" name="phone_number" placeholder="Номер телефона">
 				<button class="cart__button cart__checkout-button" type="submit">Отправить сведения о заказе</button>
 			</form>

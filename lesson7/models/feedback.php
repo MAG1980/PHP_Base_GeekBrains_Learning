@@ -23,9 +23,7 @@ function deleteFeedBack()
 {
     $id = secureRequestPrepare((int)$_GET['id']);
     $sql = "DELETE FROM feedback WHERE id = {$id}";
-    var_dump($sql);
     executeSql($sql);
-    var_dump($id);
     header('Location:/feedback/?status=delete');
     die();
 }

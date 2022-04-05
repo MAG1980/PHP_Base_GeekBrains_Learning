@@ -1,14 +1,14 @@
 <?php
+session_start();
 // $_POST['send'] берётся из кнопки submit формы авторизации
 if (isset($_POST['send'])) {
     $login = $_POST['login'];
     $password = $_POST['password'];
-    var_dump($login);
-    var_dump($password);
-
     if (!auth($login, $password)) {
         die('Неверный логин или пароль!');
+
     } else {
+
         if (isset($_POST['save'])) {
             //генерация hash для сохранения в cookie и БД
             $hash = uniqid(rand(), true);
@@ -17,20 +17,8 @@ if (isset($_POST['send'])) {
             executeSql($sql);//обновляем hash в БД для соответствующего id
             setcookie('hash', $hash, time() + 3600, '/');
         }
-        var_dump($_SESSION);
-//        die();
         header('Location:' . $_SERVER['HTTP_REFERER']);
     }
-}
-
-//Logout
-if (isset($_GET['logout'])) {
-
-    $_SESSION = [];
-    session_destroy();                          //Уничтожаем сессию
-
-    setcookie('hash', '', time() - 3600, '/');  //Делаем cookie просроченными
-    header('Location: /');
 }
 
 /**
@@ -45,12 +33,10 @@ function auth($login, $password): bool
 
     //получение id и hash пароля в БД, соответствующий $login
     $passDb = getOneResult($sql);
-    var_dump($passDb);
 
     if (password_verify($password, $passDb['password'])) {
         $_SESSION['login'] = $login;// что приводит к isAuth() = true
         $_SESSION['id'] = $passDb['id'];//id пользователя из БД пишем в сессию
-        var_dump($_SESSION);
         return true;
     }
     return false;
@@ -69,11 +55,23 @@ function isAuth(): bool
         $hash = $_COOKIE['hash'];
         // login в БД, соответствующий hash, хранящемуся в cookie
         $login = getUserLoginFromDB($hash);
+
         // если в БД существует такой login, то в сессию записываем полученный из БД логин
-        if (!empty($login)) {
+        if (isset($login)) {
             $_SESSION['login'] = $login;
         }
     }
+
+    //Logout
+    if (isset($_GET['logout'])) {
+        unset($_SESSION['login']);
+        unset($_SESSION['id']);
+        session_destroy();                          //Уничтожаем сессию
+
+        setcookie('hash', '', time() - 3600, '/');  //Делаем cookie просроченными
+        header('Location: /');
+    }
+
     return isset($_SESSION['login']); //если COOKIE нет, авторизуем по сессии
 }
 

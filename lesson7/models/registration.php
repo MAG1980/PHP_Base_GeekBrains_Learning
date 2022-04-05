@@ -19,7 +19,6 @@ function registerNewUser($login, $password)
 {
     $password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (login, password) VALUES ('{$login}', '{$password}')";
-    var_dump($sql);
     executeSql($sql);
 }
 

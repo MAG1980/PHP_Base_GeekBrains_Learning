@@ -1,4 +1,3 @@
-<?= var_dump($params) ?>
 <?php if (is_null($message)): ?>
 	<div class="registration container">
 		<form class="registration__form" action="/registration/do" method="post">
