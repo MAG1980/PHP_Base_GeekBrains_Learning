@@ -154,6 +154,24 @@ a:hover img {
 	cursor: pointer;
 }
 
+.menu__cart {
+	position: relative;
+}
+
+.menu__cart-span {
+	position: absolute;
+	top: -10px;
+	right: 0;
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	font-size: 14px;
+	text-align: center;
+	background-color: green;
+	padding: 5px;
+}
+
 .registration {
 
 }

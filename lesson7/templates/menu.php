@@ -1,4 +1,5 @@
 <? //= ($_SERVER['REQUEST_URI'] != '/') ? '<p><a href=" / ">Главная</a></p>' : '' ?>
+
 <?php if (!$is_auth): ?>
 	<form action="" method="post">
 		<input class="menu__input" type="text" name="login" placeholder="Login">
@@ -24,10 +25,14 @@
 	</li>
 	<li class="menu_item"><a class="menu__link" href="/feedback">Отзывы</a>
 	</li>
-	<li class="menu_item"><a class="menu__link" href="/cart/get">Корзина</a><br>
+	<li class="menu_item"><a class="menu__link menu__cart" href="/cart/get">Корзина
+			<?php if (isset($_SESSION['cartCounter']) && $_SESSION['cartCounter'] > 0): ?>
+				<span class="menu__cart-span"><?= $_SESSION['cartCounter'] ?></span>
+			<?php endif; ?>
+		</a>
 	</li>
 	<?php if ($user === 'admin'): ?>
-		<li class="menu_item"><a class="menu__link" href="/orders">Заказы</a><br>
+		<li class="menu_item"><a class="menu__link" href="/orders">Заказы</a>
 		</li>
 	<?php endif; ?>
 </ul>

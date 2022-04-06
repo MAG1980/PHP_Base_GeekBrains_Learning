@@ -1,6 +1,6 @@
 <?php
 
-function doCartAction($action, $session_id, $goods_id, $customer_name = '', $phone_number = '')
+function doCartAction($action, $session_id, $goods_id, $customer_name = '', $phone_number = '', $goods_count = '')
 {
 
     if ($action == "get") {
@@ -8,6 +8,7 @@ function doCartAction($action, $session_id, $goods_id, $customer_name = '', $pho
     }
 
     if ($action == "delete") {
+        $_SESSION['cartCounter'] -= (int)$goods_count;
         deleteCartRow($session_id, $goods_id);
         header("Location: /cart/get/?message=delete-ok");
         die();

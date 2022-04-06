@@ -20,6 +20,7 @@
 				<div class="cart__column cart__good-total-price"><?= $cartLine['full_price'] ?></div>
 				<form action="/cart/delete/" method="post">
 					<input type="text" name="goods_id" value="<?= $cartLine['goods_id'] ?>" hidden>
+					<input type="text" name="goods_count" value="<?= $cartLine['number'] ?>" hidden>
 					<button class="cart__button" type="submit">Удалить</button>
 				</form>
 			</div>

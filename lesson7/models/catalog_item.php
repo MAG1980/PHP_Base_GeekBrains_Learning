@@ -9,6 +9,7 @@ function doCatalogItemAction($action, $session_id)
 
 function addItemToCart($session_id)
 {
+    $_SESSION['cartCounter'] += 1;
     $id = secureRequestPrepare($_POST['id']);
     $sql = "INSERT INTO cart (session_id, goods_id) VALUES ('{$session_id}', '{$id}')";
     executeSql($sql);
