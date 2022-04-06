@@ -31,7 +31,7 @@
 			<?php endif; ?>
 		</a>
 	</li>
-	<?php if ($user === 'admin'): ?>
+	<?php if (isAuth()): ?>
 		<li class="menu_item"><a class="menu__link" href="/orders">Заказы</a>
 		</li>
 	<?php endif; ?>

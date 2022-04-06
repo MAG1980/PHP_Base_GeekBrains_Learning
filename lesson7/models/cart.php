@@ -15,7 +15,9 @@ function doCartAction($action, $session_id, $goods_id, $customer_name = '', $pho
     }
 
     if ($action == "checkout") {
-        cartCheckout($session_id, $customer_name, $phone_number);
+        $login = getUserLogin();
+        cartCheckout($session_id, $customer_name, $phone_number, $login);
+        $_SESSION['cartCounter'] = 0;
         session_regenerate_id();
         header("Location: /cart/get/?message=order-ok");
         die();
@@ -40,9 +42,9 @@ function deleteCartRow($session_id, $goods_id)
     executeSql($sql);
 }
 
-function cartCheckout($session_id, $customer_name, $phone_number)
+function cartCheckout($session_id, $customer_name, $phone_number, $login)
 {
-    $sql = "INSERT INTO orders (cart_session, customer_name, phone_number) VALUES ('{$session_id}', '{$customer_name}', '{$phone_number}') ";
+    $sql = "INSERT INTO orders (cart_session, customer_name, phone_number, login) VALUES ('{$session_id}', '{$customer_name}', '{$phone_number}', '{$login}') ";
     executeSql($sql);
 }
 

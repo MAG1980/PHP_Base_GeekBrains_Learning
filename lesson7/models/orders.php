@@ -15,8 +15,12 @@ function getOrders()
 {
 //    $sql = 'SELECT orders.id, orders.customer_name AS customer, orders.phone_number AS phone, cart.session_id AS cart, cart
 //.goods_id FROM orders LEFT JOIN cart ON cart.session_id = orders.cart_session';
-
-    $sql = 'SELECT * FROM orders';
+    $login = getUserLogin();
+    if ($login === 'admin') {
+        $sql = 'SELECT * FROM orders';
+    } else {
+        $sql = "SELECT * FROM orders WHERE login = '{$login}'";
+    }
     return getAssocResult($sql);
 
 }
