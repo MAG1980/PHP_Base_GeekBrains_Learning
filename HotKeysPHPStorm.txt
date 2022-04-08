@@ -1,0 +1,21 @@
+ctrl+shift+F7 - поиск вхождений выделенного текста
+F3 и shift+F3 - навигация по вхождениям
+
+ctrl+D - дублировать выделенную строку
+
+ctrl+R - поиск с заменой
+
+Alt+Enter - настройки форматирования выделенного текста
+
+[CTRL] + [ALT] + L и IDE отформатирует код в соответствии с настройками (Preferences -> Project Settings -> Code Style -> PHP)
+
+ctrl + F12 - terminal
+
+Shift+F6 - рефакторинг
+Вы можете легко переименовывать свои классы, методы и переменные с автоматическим исправлением всех мест, где они используются. Поместите курсор на символ, который хотите переименовать, и нажмите Shift+F6 (Рефакторинг | Переименовать). Введите новое имя и нажмите Enter.
+
+
+Press Shift twice to search for files, actions, symbols, UI elements, Git branches and comments across your project. Pressing double Shift again, will extend the search to non-project items.
+Use tabs or direct shortcuts Ctrl+N for classes, Ctrl+Shift+N for files, Ctrl+Alt+Shift+N for symbols, and Ctrl+Shift+A for actions to narrow your search results.
+
+Дважды нажмите клавишу Shift, чтобы выполнить поиск файлов, действий, символов, элементов пользовательского интерфейса, веток Git и комментариев в вашем проекте. Повторное двойное нажатие Shift расширит поиск до элементов, не входящих в проект. Используйте вкладки или прямые сочетания клавиш Ctrl+N для классов, Ctrl+Shift+N для файлов, Ctrl+Alt+Shift+N для символов и Ctrl+Shift+A для действий, чтобы сузить результаты поиска.
